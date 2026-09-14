@@ -1,8 +1,9 @@
 <div id="header">
+
     <div id="logo">
         <a href="/">
             <img src="/images/logo.png"
-                 alt="LOGO"
+                 alt="Travlr Getaways logo"
                  height="100"
                  width="200">
         </a>
@@ -10,11 +11,12 @@
 
     <div id="navigation">
         <ul>
-            <li>
+
+            <li {{#if homePage}} class="selected" {{/if}}>
                 <a href="/">Home</a>
             </li>
 
-            <li class="selected">
+            <li {{#if travelPage}} class="selected" {{/if}}>
                 <a href="/travel">Travel</a>
             </li>
 
@@ -37,6 +39,8 @@
             <li>
                 <a href="/contact.html">Contact</a>
             </li>
+
         </ul>
     </div>
+
 </div>

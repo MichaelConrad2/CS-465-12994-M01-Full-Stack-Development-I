@@ -36,6 +36,31 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/travel', travelRouter);
 
+// Enable CORS for Angular SPA
+app.use('/api', function(req, res, next) {
+
+  res.header(
+    'Access-Control-Allow-Origin',
+    'http://localhost:4200'
+  );
+
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+
+  res.header(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, DELETE, OPTIONS'
+  );
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+
+  next();
+});
+
 // API routes
 app.use('/api', apiRouter);
 

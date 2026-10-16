@@ -3,6 +3,7 @@
 
   <button class="btn btn-primary"
           type="button"
+          *ngIf="isLoggedIn()"
           (click)="addTrip()">
     Add Trip
   </button>

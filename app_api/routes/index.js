@@ -1,38 +1,18 @@
 const express = require('express');
-
 const router = express.Router();
 
-const ctrlTrips =
-  require('../controllers/trips');
+const ctrlTrips = require('../controllers/trips');
+const ctrlAuth = require('../controllers/authentication');
+const { requireAuth } = require('../middleware/auth');
 
-// GET all trips
-router.get(
-  '/trips',
-  ctrlTrips.tripsList
-);
+router.post('/register', ctrlAuth.register);
+router.post('/login', ctrlAuth.login);
 
-// GET one trip
-router.get(
-  '/trips/:tripCode',
-  ctrlTrips.tripsFindByCode
-);
+router.get('/trips', ctrlTrips.tripsList);
+router.get('/trips/:tripCode', ctrlTrips.tripsFindByCode);
 
-// POST new trip
-router.post(
-  '/trips',
-  ctrlTrips.tripsAddTrip
-);
-
-// PUT existing trip
-router.put(
-  '/trips/:tripCode',
-  ctrlTrips.tripsUpdateTrip
-);
-
-// DELETE existing trip
-router.delete(
-  '/trips/:tripCode',
-  ctrlTrips.tripsDeleteTrip
-);
+router.post('/trips', requireAuth, ctrlTrips.tripsAddTrip);
+router.put('/trips/:tripCode', requireAuth, ctrlTrips.tripsUpdateTrip);
+router.delete('/trips/:tripCode', requireAuth, ctrlTrips.tripsDeleteTrip);
 
 module.exports = router;
